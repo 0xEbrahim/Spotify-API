@@ -11,6 +11,12 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './songs/song.entity';
+import { Artist } from './artists/artist.entity';
+import { User } from './users/user.entity';
+import { Playlist } from './playlists/playlist.entity';
+import { PlaylistsModule } from './playlists/playlists.module';
+import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
   imports: [
@@ -22,9 +28,12 @@ import { Song } from './songs/song.entity';
       username: 'postgres',
       password: 'root',
       database: 'spotify-clone',
-      entities: [Song],
+      entities: [Song, Artist, User, Playlist],
       synchronize: true,
     }),
+    PlaylistsModule,
+    UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [
