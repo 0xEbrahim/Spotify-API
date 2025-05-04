@@ -1,9 +1,19 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { CreateSongDTO } from './dto/create-song-dto';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import {
+  createQueryBuilder,
+  DeleteResult,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 import { Song } from './song.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateSongDTO } from './dto/update-song-dto';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 
 @Injectable({
   scope: Scope.REQUEST,
@@ -37,5 +47,9 @@ export class SongsService {
 
   updateOne(id: number, songDTO: UpdateSongDTO): Promise<UpdateResult> {
     return this.songRepository.update(id, songDTO);
+  }
+
+  paginate(options: IPaginationOptions): Promise<Pagination<Song>> {
+    return paginate<Song>(this.songRepository, options);
   }
 }
