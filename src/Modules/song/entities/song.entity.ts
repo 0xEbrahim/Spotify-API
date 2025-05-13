@@ -5,6 +5,10 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 export class SongEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: 'date' })
+  releasedDate: Date;
+
   @Column()
   name: string;
 
