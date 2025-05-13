@@ -1,12 +1,10 @@
 import { Exclude } from 'class-transformer';
+import { AbstractedEntity } from 'src/Common/entities/entity';
 import { PlaylistEntity } from 'src/Modules/playlist/entities/playlist.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
-export class UserEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class UserEntity extends AbstractedEntity {
   @Column({ type: 'varchar' })
   name: string;
 

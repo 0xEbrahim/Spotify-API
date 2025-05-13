@@ -1,11 +1,9 @@
+import { AbstractedEntity } from 'src/Common/entities/entity';
 import { PlaylistEntity } from 'src/Modules/playlist/entities/playlist.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'songs' })
-export class SongEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class SongEntity extends AbstractedEntity {
   @Column({ type: 'date' })
   releasedDate: Date;
 

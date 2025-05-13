@@ -1,18 +1,10 @@
+import { AbstractedEntity } from 'src/Common/entities/entity';
 import { SongEntity } from 'src/Modules/song/entities/song.entity';
 import { UserEntity } from 'src/Modules/user/entities/user.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('playlists')
-export class PlaylistEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class PlaylistEntity extends AbstractedEntity {
   @Column()
   name: string;
 
