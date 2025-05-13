@@ -10,4 +10,10 @@ export default () => ({
     entities: [],
     synchronize: process.env.NODE_ENV === 'development',
   },
+  jwt: {
+    secret: 'HAD_12@#$',
+    signOptions: {
+      expiresIn: '30d',
+    },
+  },
 });

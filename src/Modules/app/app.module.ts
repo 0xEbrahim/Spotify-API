@@ -10,7 +10,6 @@ import { UserEntity } from '../user/entities/user.entity';
 import { PlaylistEntity } from '../playlist/entities/playlist.entity';
 import { SongEntity } from '../song/entities/song.entity';
 import { AuthModule } from '../auth/auth.module';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
