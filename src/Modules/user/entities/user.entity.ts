@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { PlaylistEntity } from 'src/Modules/playlist/entities/playlist.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -6,13 +7,14 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   // User can have many playlists

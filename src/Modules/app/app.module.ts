@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from '../user/user.module';
 import { SongModuel } from '../song/song.module';
 import { PlaylistModuel } from '../playlist/playlist.module';
+import { UserEntity } from '../user/entities/user.entity';
+import { PlaylistEntity } from '../playlist/entities/playlist.entity';
+import { SongEntity } from '../song/entities/song.entity';
 
 @Module({
   imports: [
@@ -14,7 +17,7 @@ import { PlaylistModuel } from '../playlist/playlist.module';
       username: 'postgres',
       password: 'root',
       database: 'spotify-clone',
-      entities: [],
+      entities: [UserEntity, PlaylistEntity, SongEntity],
       port: 5432,
       synchronize: true,
       host: 'localhost',
