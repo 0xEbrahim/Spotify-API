@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
 import { UserEntity } from './entities/user.entity';
@@ -18,5 +18,11 @@ export class UserService {
     userData.password = await bcrypt.hash(userData.password, salt);
     const user = await this.userRepository.save(userData);
     return plainToInstance(UserEntity, user);
+  }
+
+  async findOne(data: Partial<UserEntity>) {
+    const user = await this.userRepository.findOneBy({ email: data.email });
+    if (!user) throw new UnauthorizedException('Incorrect email or password.');
+    return user;
   }
 }

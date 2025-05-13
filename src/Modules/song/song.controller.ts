@@ -4,10 +4,12 @@ import {
   Delete,
   Get,
   HttpStatus,
+  Optional,
   Param,
   ParseIntPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { SongService } from './song.service';
 import { CreateSongDTO } from './dtos/create-song.dto';
@@ -23,7 +25,24 @@ export class SongController {
   }
 
   @Get('/')
-  async findAll() {}
+  async findAll(
+    @Optional()
+    @Query(
+      'page',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    page: number = 1,
+    @Optional()
+    @Query(
+      'limit',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    limit: number = 10,
+  ) {
+    page = page || 1;
+    limit = Math.max(limit, 50) || 10;
+    return this.songService.findAll({ page, limit });
+  }
 
   @Get('/:id')
   async findOne(

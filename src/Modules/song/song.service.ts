@@ -4,6 +4,7 @@ import { SongEntity } from './entities/song.entity';
 import { Repository } from 'typeorm';
 import { CreateSongDTO } from './dtos/create-song.dto';
 import { UpdateSongDTO } from './dtos/update-song.dto';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class SongService {
@@ -17,7 +18,9 @@ export class SongService {
     return song;
   }
 
-  async findAll() {}
+  async findAll(options: IPaginationOptions) {
+    return paginate<SongEntity>(this.songRepository, options);
+  }
   async findOne(id: number) {
     const song = await this.songRepository.findBy({ id: id });
     return song;
